@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="marsNapady:jar">
+    <output-path>$USER_HOME$/Desktop/Serwery/MarsLife/plugins</output-path>
+    <root id="archive" name="marsNapady.jar">
+      <element id="module-output" name="marsNapady" />
+    </root>
+  </artifact>
+</component>
