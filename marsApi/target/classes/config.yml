@@ -1,0 +1,7 @@
+MySQL:
+  ip: remotemysql.com
+  port: 3306
+  database: Xr4jG9xBB7
+  username: Xr4jG9xBB7
+  password: fQKKM0WZKB
+  safeSave: true
