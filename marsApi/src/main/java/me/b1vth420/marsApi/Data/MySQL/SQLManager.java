@@ -3,9 +3,14 @@ package me.b1vth420.marsApi.Data.MySQL;
 
 import me.b1vth420.marsApi.Api;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SQLManager {
 
@@ -48,11 +53,11 @@ public class SQLManager {
         }
     }
 
-    public String loadData(String statement, String[] data) {
+    public Map<String, Object> loadData(String statement, String[] data) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet result = null;
-        String s = null;
+        Map<String, Object> row = null;
         try {
             conn = pool.getConnection();
             ps = conn.prepareStatement(statement);
@@ -61,9 +66,9 @@ public class SQLManager {
             }
             result = ps.executeQuery();
             if (result.next()) {
-                ResultSetMetaData rsmd = result.getMetaData();
-                for (int i = 0; i < rsmd.getColumnCount(); i++) {
-                    s += result.getString(i + 1) + " ";
+                row = new HashMap<String, Object>();
+                for (int i = 1; i <= result.getMetaData().getColumnCount(); i++) {
+                    row.put(result.getMetaData().getColumnName(i), result.getObject(i));
                 }
             }
         } catch (SQLException e) {
@@ -71,54 +76,36 @@ public class SQLManager {
         } finally {
             pool.close(conn, ps, result);
         }
-        return s;
+        return row;
     }
 
-    public int checkNumber(String statement, String[] data) {
+    public List<Map<String, Object>> loadData(String statement) {
+        List<Map<String, Object>> resultList = new ArrayList<>();
+        Map<String, Object> row = null;
+
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet result = null;
-        int s = 0;
-        try {
-            conn = pool.getConnection();
-            ps = conn.prepareStatement(statement);
-            for (int i = 1; i < data.length + 1; i++) {
-                ps.setString(i, data[i - 1]);
-            }
-            result = ps.executeQuery();
-            if (result.next()) {
-                s++;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            pool.close(conn, ps, result);
-        }
-        return s;
-    }
-
-    public List<String> loadData(String statement) {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet result = null;
-        List<String> results = new ArrayList<>();
         try {
             conn = pool.getConnection();
             ps = conn.prepareStatement(statement);
             result = ps.executeQuery();
             while (result.next()) {
-                String s = "";
-                ResultSetMetaData rsmd = result.getMetaData();
-                for (int i = 0; i < rsmd.getColumnCount(); i++)
-                    s += result.getString(i + 1) + " ";
-                results.add(s);
+                row = new HashMap<>();
+                System.out.println(result.getMetaData().getColumnCount());
+                for (int i = 1; i <= result.getMetaData().getColumnCount(); i++) {
+                    System.out.println(result.getMetaData().getColumnName(i) + " " + result.getObject(i));
+                    row.put(result.getMetaData().getColumnName(i), result.getObject(i));
+                }
+                resultList.add(row);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             pool.close(conn, ps, result);
         }
-        return results;
+        if (resultList.isEmpty()) System.out.println("gjaojg");
+        return resultList;
     }
 
     public void onDisable() {

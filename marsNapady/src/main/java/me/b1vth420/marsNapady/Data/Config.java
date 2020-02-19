@@ -42,11 +42,11 @@ public class Config {
         Set<String> bankomatString = new HashSet<>();
         cfg.set("heistTime", this.heistTime);
         cfg.set("policePermission", this.policePermission);
-        cfg.set("npc", npc);
+        cfg.set("npc", npc.toArray());
         for (Location s : bankomat) {
             bankomatString.add(s.getWorld() + " " + s.getBlockX() + " " + s.getBlockY() + " " + s.getBlockZ());
         }
-        cfg.set("bank", bankomatString);
+        cfg.set("bank", bankomatString.toArray());
         try {
             cfg.save(f);
         } catch (IOException e) {

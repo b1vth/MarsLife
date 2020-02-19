@@ -22,11 +22,13 @@ public class AsyncPlayerChatListener implements Listener {
         }
 
         if (data.get(p).equals("wyplacanie")) {
+            e.setCancelled(true);
             u.removeBankMoney(Double.parseDouble(e.getMessage().split(" ")[0]));
             removeData(p);
         }
 
         if (data.get(p).equals("wplacanie")) {
+            e.setCancelled(true);
             u.addBankMoney(Double.parseDouble(e.getMessage().split(" ")[0]));
             removeData(p);
         }

@@ -44,19 +44,30 @@ public class User {
         this.credit = credit;
     }
 
+    public void setCreditSize(int size) {
+        this.creditSize = size;
+    }
+
     public int getCreditSize() {
         return creditSize;
     }
 
     public void addBankMoney(double money) {
-        EconomyUtil.removeMoney(Bukkit.getPlayer(this.uuid), money);
         if (EconomyUtil.getBalance(Bukkit.getPlayer(this.uuid)) >= money) {
+            EconomyUtil.removeMoney(Bukkit.getPlayer(this.uuid), money);
             bankMoney += money;
+        } else {
+            sendMessage(ChatUtil.chat("&4Blad! &cNie masz tyle pieniedzy!"));
         }
     }
 
     public void sendMessage(String s) {
         Bukkit.getPlayer(this.uuid).sendMessage(ChatUtil.chat(s));
+    }
+
+    public void resetCredit() {
+        this.setCredit(false);
+        this.setCreditSize(0);
     }
 
     public void removeBankMoney(double money) {

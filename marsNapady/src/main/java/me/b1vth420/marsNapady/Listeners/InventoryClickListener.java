@@ -37,14 +37,15 @@ public class InventoryClickListener implements Listener {
                 Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInst(), new Runnable() {
                     @Override
                     public void run() {
-                        int money = RandomUtil.getRandInt(20000, 10000);
+                        int money = RandomUtil.getRandInt(20000, 100000);
                         EconomyUtil.addMoney(p, money);
-                        p.sendTitle(ChatUtil.chat("&2Napad"), ChatUtil.chat("&aOtrzymales " + money + " od sprzedawcy"), 20, 100, 20);
+                        p.closeInventory();
+                        p.sendTitle(ChatUtil.chat("&2Napad"), ChatUtil.chat("&aOtrzymales " + money + "$ od sprzedawcy"), 20, 100, 20);
                     }
-                }, Config.getInst().heistTime * 20L);
+                }, 40 * 20L);
             }
 
-            if (ItemUtil.checkItem(e.getCurrentItem(), ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aWplac"), (short) 5))) {
+            if (ItemUtil.checkItem(e.getCurrentItem(), ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aWyplac"), (short) 5))) {
                 AsyncPlayerChatListener.addData(p, "wyplacanie");
                 p.sendTitle(ChatUtil.chat("&2Wyplacanie"), ChatUtil.chat("&aPodaj kwote na chacie"), 20, 100, 20);
                 p.closeInventory();
@@ -62,34 +63,50 @@ public class InventoryClickListener implements Listener {
             e.setCancelled(true);
         }
 
-        if (e.getInventory().getName().equals(ChatUtil.chat("&aPozyczka"))) {
+        if (e.getInventory().getName().replace("§a", "").equals("Pozyczka")) {
+            final int slot = e.getSlot();
             e.setCancelled(true);
-            if (u.isCredit()) {
-                p.sendMessage(ChatUtil.chat("&4Blad! &cMasz juz jedna pozyczke"));
-                return;
-            }
-            if (e.getSlot() == 9) {
-                EconomyUtil.addMoney(p, 2000);
-                u.setCredit(true);
-            }
-            if (e.getSlot() == 11) {
-                EconomyUtil.addMoney(p, 5000);
-                u.setCredit(true);
-            }
-            if (e.getSlot() == 13) {
-                EconomyUtil.addMoney(p, 10000);
-                u.setCredit(true);
-            }
-            if (e.getSlot() == 15) {
-                EconomyUtil.addMoney(p, 20000);
-                u.setCredit(true);
-            }
-            if (e.getSlot() == 26) {
-                if (EconomyUtil.getBalance(p) >= u.getCreditSize()) {
-                    EconomyUtil.removeMoney(p, u.getCreditSize());
+
+            if (slot == 26) {
+                if (u.isCredit() && EconomyUtil.getBalance(p) >= u.getCreditSize() + (0.1 * u.getCreditSize())) {
+                    EconomyUtil.removeMoney(p, u.getCreditSize() + (0.1 * u.getCreditSize()));
+                    p.sendMessage(ChatUtil.chat("&2Splaciles pozyczke!"));
+                    p.closeInventory();
+                    u.resetCredit();
                 } else {
                     p.sendMessage(ChatUtil.chat("&4Blad! &cNie masz przy sobie wystarczajacej kwoty!"));
                 }
+                return;
+            }
+
+            if (u.isCredit()) {
+                p.sendMessage(ChatUtil.chat("&4Blad! &cMasz juz jedna pozyczke"));
+                p.closeInventory();
+                return;
+            }
+            if (slot == 10) {
+                EconomyUtil.addMoney(p, 2000);
+                u.setCreditSize(2000);
+                u.setCredit(true);
+                p.closeInventory();
+            }
+            if (slot == 12) {
+                EconomyUtil.addMoney(p, 5000);
+                u.setCreditSize(5000);
+                u.setCredit(true);
+                p.closeInventory();
+            }
+            if (slot == 14) {
+                EconomyUtil.addMoney(p, 10000);
+                u.setCreditSize(10000);
+                u.setCredit(true);
+                p.closeInventory();
+            }
+            if (slot == 16) {
+                EconomyUtil.addMoney(p, 20000);
+                u.setCreditSize(20000);
+                u.setCredit(true);
+                p.closeInventory();
             }
         }
 

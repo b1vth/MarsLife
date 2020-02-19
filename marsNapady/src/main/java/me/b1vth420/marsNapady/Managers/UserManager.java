@@ -10,7 +10,7 @@ public class UserManager {
     private static ConcurrentHashMap<String, User> users = new ConcurrentHashMap<String, User>();
 
     public static ConcurrentHashMap<String, User> getUsers() {
-        return new ConcurrentHashMap<String, User>(users);
+        return new ConcurrentHashMap<>(users);
     }
 
     public static void addUser(User u) {
