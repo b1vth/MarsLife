@@ -32,9 +32,7 @@ public class MySQL {
 
     public static void loadUsers() {
         for (Map result : Api.getInst().getSQLManager().loadData("SELECT * FROM marsUsers")) {
-            User u = new User((String) result.get("name"), UUID.fromString(((String) result.get("UUID"))), Double.parseDouble((String) result.get("bankMoney")), Boolean.parseBoolean((String) result.get("isCredit")), Integer.parseInt((String) result.get("creditSize")));
-            System.out.println("gagoiahdgoiaoighdihgodaahgdhoigdhigadoihgoihdaoihgdaoihgdahoigdaoig");
-            System.out.println(u.isCredit());
+            new User((String) result.get("name"), UUID.fromString(((String) result.get("UUID"))), Double.parseDouble((String) result.get("bankMoney")), Boolean.parseBoolean((String) result.get("isCredit")), Integer.parseInt((String) result.get("creditSize")));
         }
     }
 }

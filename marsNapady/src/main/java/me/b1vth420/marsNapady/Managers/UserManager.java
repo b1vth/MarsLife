@@ -3,6 +3,8 @@ package me.b1vth420.marsNapady.Managers;
 import me.b1vth420.marsNapady.Objects.User;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserManager {
@@ -26,5 +28,13 @@ public class UserManager {
             if (u.getUuid().equals(p.getUniqueId())) return u;
         }
         return new User(p.getName(), p.getUniqueId(), 0, false, 0);
+    }
+
+    public static List<User> getUsersWithDebt() {
+        List<User> toReturn = new ArrayList<>();
+        for (User u : users.values()) {
+            if (u.isCredit()) toReturn.add(u);
+        }
+        return toReturn;
     }
 }

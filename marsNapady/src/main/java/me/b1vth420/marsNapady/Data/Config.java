@@ -1,13 +1,17 @@
 package me.b1vth420.marsNapady.Data;
 
+import me.b1vth420.marsApi.Utils.ItemUtil;
 import me.b1vth420.marsNapady.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Config {
@@ -23,6 +27,8 @@ public class Config {
     public Set<Location> bankomat = new HashSet<>();
     public int heistTime;
     public String policePermission;
+    public List<ItemStack> heistItems;
+    public int policeForHeist;
 
     public void load() {
         for (String s : cfg.getStringList("npc")) {
@@ -35,6 +41,8 @@ public class Config {
         }
         this.heistTime = cfg.getInt("heistTime");
         this.policePermission = cfg.getString("policePermission");
+        this.heistItems = ItemUtil.parseItems(cfg.getStringList("heistItems"));
+        this.policeForHeist = cfg.getInt("policeForHeist");
     }
 
     public void save() {
@@ -47,6 +55,14 @@ public class Config {
             bankomatString.add(s.getWorld() + " " + s.getBlockX() + " " + s.getBlockY() + " " + s.getBlockZ());
         }
         cfg.set("bank", bankomatString.toArray());
+        List<String> heistItems = new ArrayList<>();
+        for (ItemStack is : this.heistItems) {
+            if (is.getItemMeta().hasDisplayName())
+                heistItems.add(is.getType().toString() + " " + is.getAmount() + " " + is.getDurability() + " " + is.getItemMeta().getDisplayName().replace("§", "&").replace(" ", "_"));
+            else heistItems.add(is.getType().toString() + " " + is.getAmount() + " " + is.getDurability() + " BRAK");
+        }
+        cfg.set("heistItems", heistItems);
+        cfg.set("policeForHeist", policeForHeist);
         try {
             cfg.save(f);
         } catch (IOException e) {

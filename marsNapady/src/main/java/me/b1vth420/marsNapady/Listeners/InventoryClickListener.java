@@ -1,14 +1,13 @@
 package me.b1vth420.marsNapady.Listeners;
 
-import me.b1vth420.marsApi.Utils.ChatUtil;
-import me.b1vth420.marsApi.Utils.EconomyUtil;
-import me.b1vth420.marsApi.Utils.ItemUtil;
-import me.b1vth420.marsApi.Utils.RandomUtil;
+import me.b1vth420.marsApi.Utils.*;
 import me.b1vth420.marsNapady.Data.Config;
 import me.b1vth420.marsNapady.Gui.NpcGui;
 import me.b1vth420.marsNapady.Main;
 import me.b1vth420.marsNapady.Managers.UserManager;
 import me.b1vth420.marsNapady.Objects.User;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,6 +15,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
 
 public class InventoryClickListener implements Listener {
 
@@ -25,24 +26,40 @@ public class InventoryClickListener implements Listener {
         Player p = (Player) e.getWhoClicked();
         User u = UserManager.getUser(p);
         ItemStack item = e.getCurrentItem();
+        NPC npc = CitizensAPI.getNPCRegistry().getNPC(Targeter.getTargetEntity(p));
 
         if (Config.getInst().npc.contains(e.getInventory().getName().replace("§a", ""))) {
+            e.setCancelled(true);
             if (ItemUtil.checkItem(e.getCurrentItem(), ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&cNapad"), (short) 11))) {
-                for (Player police : Bukkit.getOnlinePlayers()) {
-                    if (police.hasPermission(Config.getInst().policePermission)) {
-                        police.sendMessage(ChatUtil.chat("&8### &4Uwaga! &cNapad w toku! (" + p.getLocation().getBlockX() + " " + p.getLocation().getBlockZ() + ") &8###"));
-                    }
+
+                List<Player> policeList = PlayerUtil.getPlayersWithPermission(Config.getInst().policePermission);
+                if (policeList.size() < Config.getInst().policeForHeist) {
+                    p.sendMessage(ChatUtil.chat("&4Blad! &cNa serwerze nie ma odpowiedniej ilosci policji!"));
+                    return;
                 }
-                p.sendTitle(ChatUtil.chat("&2Napad"), ChatUtil.chat("&aSprzedawca wyjmuje pieniadze z kasy"), 20, 100, 20);
-                Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInst(), new Runnable() {
-                    @Override
-                    public void run() {
-                        int money = RandomUtil.getRandInt(20000, 100000);
-                        EconomyUtil.addMoney(p, money);
-                        p.closeInventory();
-                        p.sendTitle(ChatUtil.chat("&2Napad"), ChatUtil.chat("&aOtrzymales " + money + "$ od sprzedawcy"), 20, 100, 20);
-                    }
-                }, 40 * 20L);
+                if (Config.getInst().heistItems.contains(p.getInventory().getItemInMainHand())) {
+                    for (Player police : policeList)
+                        police.sendMessage(ChatUtil.chat("&8### &4Uwaga! &cNapad w toku (" + npc.getStoredLocation().getBlockX() + ", " + npc.getStoredLocation().getBlockZ() + ") &###"));
+
+                    p.sendTitle(ChatUtil.chat("&2Napad"), ChatUtil.chat("&aSprzedawca wyjmuje pieniadze z kasy"), 20, 100, 20);
+                    p.closeInventory();
+                    NpcClickListener.addData(npc, true);
+
+                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInst(), new Runnable() {
+                        @Override
+                        public void run() {
+                            NpcClickListener.removeData(npc);
+                            if (p.getLocation().distance(npc.getStoredLocation()) > 20) {
+                                p.sendMessage(ChatUtil.chat("&4Blad! Napad zostal przerwany!"));
+                                return;
+                            }
+                            int money = RandomUtil.getRandInt(20000, 100000);
+                            EconomyUtil.addMoney(p, money);
+                            NpcClickListener.removeData(npc);
+                            p.sendTitle(ChatUtil.chat("&2Napad"), ChatUtil.chat("&aOtrzymales " + money + "$ od sprzedawcy"), 20, 100, 20);
+                        }
+                    }, Config.getInst().heistTime * 20L);
+                }
             }
 
             if (ItemUtil.checkItem(e.getCurrentItem(), ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aWyplac"), (short) 5))) {
@@ -60,7 +77,6 @@ public class InventoryClickListener implements Listener {
             if (ItemUtil.checkItem(e.getCurrentItem(), ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&bPozyczka"), (short) 14))) {
                 NpcGui.pozyczkaGui(p, "&aPozyczka");
             }
-            e.setCancelled(true);
         }
 
         if (e.getInventory().getName().replace("§a", "").equals("Pozyczka")) {

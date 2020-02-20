@@ -1,0 +1,4 @@
+name: marsNapady
+version: 1.0
+main: me.b1vth420.marsNapady.Main
+depend: [Citizens, Vault]

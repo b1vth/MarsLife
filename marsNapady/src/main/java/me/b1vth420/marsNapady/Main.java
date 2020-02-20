@@ -2,6 +2,7 @@ package me.b1vth420.marsNapady;
 
 import me.b1vth420.marsApi.Utils.RegisterUtil;
 import me.b1vth420.marsNapady.Commands.BankCommand;
+import me.b1vth420.marsNapady.Commands.PoszukiwaniCommand;
 import me.b1vth420.marsNapady.Data.Config;
 import me.b1vth420.marsNapady.Data.MySQL;
 import me.b1vth420.marsNapady.Listeners.AsyncPlayerChatListener;
@@ -40,6 +41,7 @@ public class Main extends JavaPlugin {
 
     void registerCommands() {
         RegisterUtil.registerCommand(new BankCommand());
+        RegisterUtil.registerCommand(new PoszukiwaniCommand());
     }
 
     void registerListeners() {
