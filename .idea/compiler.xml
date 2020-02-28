@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="marsNapady" />
+        <module name="marsChoroby" />
         <module name="marsApi" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="marsApi" target="1.8" />
+      <module name="marsChoroby" target="1.8" />
       <module name="marsNapady" target="1.8" />
     </bytecodeTargetLevel>
   </component>

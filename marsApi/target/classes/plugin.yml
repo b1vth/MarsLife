@@ -1,4 +1,4 @@
-name: LifeApi
+name: marsApi
 version: 1.0-SNAPSHOT
 main: me.b1vth420.marsApi.Api
 api-version: 1.13

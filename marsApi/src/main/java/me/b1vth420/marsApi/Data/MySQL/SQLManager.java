@@ -93,10 +93,8 @@ public class SQLManager {
             while (result.next()) {
                 row = new HashMap<>();
                 System.out.println(result.getMetaData().getColumnCount());
-                for (int i = 1; i <= result.getMetaData().getColumnCount(); i++) {
-                    System.out.println(result.getMetaData().getColumnName(i) + " " + result.getObject(i));
+                for (int i = 1; i <= result.getMetaData().getColumnCount(); i++)
                     row.put(result.getMetaData().getColumnName(i), result.getObject(i));
-                }
                 resultList.add(row);
             }
         } catch (SQLException e) {
@@ -104,7 +102,6 @@ public class SQLManager {
         } finally {
             pool.close(conn, ps, result);
         }
-        if (resultList.isEmpty()) System.out.println("gjaojg");
         return resultList;
     }
 

@@ -1,6 +1,7 @@
 package me.b1vth420.marsNapady.Commands;
 
 import me.b1vth420.marsApi.Commands.Command;
+import me.b1vth420.marsApi.Utils.ChatUtil;
 import me.b1vth420.marsApi.Utils.Targeter;
 import me.b1vth420.marsNapady.Data.Config;
 import net.citizensnpcs.api.CitizensAPI;
@@ -56,10 +57,13 @@ public class BankCommand extends Command {
         if (args[0].equalsIgnoreCase("bankomat")) {
             if (args[1].equalsIgnoreCase("create")) {
                 Block b = p.getTargetBlock(null, 100);
-
+                Config.getInst().bankomat.add(b.getLocation());
+                p.sendMessage(ChatUtil.chat("&aStworzyles bankomat!"));
             }
             if (args[1].equalsIgnoreCase("remove")) {
-
+                Block b = p.getTargetBlock(null, 100);
+                Config.getInst().bankomat.remove(b.getLocation());
+                p.sendMessage(ChatUtil.chat("&aUsunales bankomat!"));
             }
         }
     }

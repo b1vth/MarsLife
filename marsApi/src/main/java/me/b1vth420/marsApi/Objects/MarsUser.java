@@ -1,13 +1,13 @@
-package me.b1vth420.marsNapady.Objects;
+package me.b1vth420.marsApi.Objects;
 
+import me.b1vth420.marsApi.Managers.UserManager;
 import me.b1vth420.marsApi.Utils.ChatUtil;
 import me.b1vth420.marsApi.Utils.EconomyUtil;
-import me.b1vth420.marsNapady.Managers.UserManager;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;
 
-public class User {
+public class MarsUser {
 
     private String name;
     private UUID uuid;
@@ -15,7 +15,7 @@ public class User {
     private boolean credit;
     private int creditSize;
 
-    public User(String name, UUID uuid, double bankMoney, boolean credit, int creditSize) {
+    public MarsUser(String name, UUID uuid, double bankMoney, boolean credit, int creditSize) {
         this.name = name;
         this.uuid = uuid;
         this.bankMoney = bankMoney;

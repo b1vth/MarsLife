@@ -48,6 +48,7 @@ public class ItemUtil {
 
             for (int ii = 4; ii < ss.length; ii++) {
                 String s1 = ss[ii].toString();
+                if (s1.isEmpty()) break;
                 String ss1[] = s1.split(":");
                 is.addUnsafeEnchantment(Enchantment.getByName(ss1[0].toUpperCase()), Integer.parseInt(ss[1]));
             }
@@ -67,12 +68,6 @@ public class ItemUtil {
                 ss1.split("_");
                 im.setDisplayName(ChatUtil.chat(ss1.replace("_", " ")));
                 is.setItemMeta(im);
-            }
-
-            for (int i = 4; i < ss.length; i++) {
-                String s1 = ss[i].toString();
-                String ss1[] = s1.split(":");
-                is.addUnsafeEnchantment(Enchantment.getByName(ss1[0].toUpperCase()), Integer.parseInt(ss[1]));
             }
             itemss.add(is);
         }

@@ -13,6 +13,7 @@ import java.util.HashMap;
 public class NpcClickListener implements Listener {
 
     private static HashMap<NPC, Boolean> data = new HashMap<>();
+    private static HashMap<NPC, Long> nextHeist = new HashMap<>();
 
     @EventHandler
     public void onClick(NPCRightClickEvent e) {
@@ -36,5 +37,17 @@ public class NpcClickListener implements Listener {
 
     public static HashMap<NPC, Boolean> getData() {
         return new HashMap<>(data);
+    }
+
+    public static HashMap<NPC, Long> getNextHeist() {
+        return new HashMap<>(nextHeist);
+    }
+
+    public static void addNextHeist(NPC npc, Long b) {
+        nextHeist.put(npc, b);
+    }
+
+    public static void removeNextHeist(NPC npc) {
+        nextHeist.remove(npc);
     }
 }

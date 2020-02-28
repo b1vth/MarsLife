@@ -52,7 +52,7 @@ public class Config {
         cfg.set("policePermission", this.policePermission);
         cfg.set("npc", npc.toArray());
         for (Location s : bankomat) {
-            bankomatString.add(s.getWorld() + " " + s.getBlockX() + " " + s.getBlockY() + " " + s.getBlockZ());
+            bankomatString.add(s.getWorld().getName() + " " + s.getBlockX() + " " + s.getBlockY() + " " + s.getBlockZ());
         }
         cfg.set("bank", bankomatString.toArray());
         List<String> heistItems = new ArrayList<>();

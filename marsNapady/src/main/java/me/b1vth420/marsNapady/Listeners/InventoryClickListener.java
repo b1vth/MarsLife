@@ -1,11 +1,11 @@
 package me.b1vth420.marsNapady.Listeners;
 
+import me.b1vth420.marsApi.Managers.UserManager;
+import me.b1vth420.marsApi.Objects.MarsUser;
 import me.b1vth420.marsApi.Utils.*;
 import me.b1vth420.marsNapady.Data.Config;
 import me.b1vth420.marsNapady.Gui.NpcGui;
 import me.b1vth420.marsNapady.Main;
-import me.b1vth420.marsNapady.Managers.UserManager;
-import me.b1vth420.marsNapady.Objects.User;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
@@ -24,11 +24,13 @@ public class InventoryClickListener implements Listener {
     public void onClick(InventoryClickEvent e) {
 
         Player p = (Player) e.getWhoClicked();
-        User u = UserManager.getUser(p);
+        MarsUser u = UserManager.getUser(p);
         ItemStack item = e.getCurrentItem();
         NPC npc = CitizensAPI.getNPCRegistry().getNPC(Targeter.getTargetEntity(p));
 
-        if (Config.getInst().npc.contains(e.getInventory().getName().replace("§a", ""))) {
+        if (e.getCurrentItem() == null && e.getClickedInventory() == null) return;
+
+        if (e.getInventory().getName().equals(ChatUtil.chat("&aBankomat")) || Config.getInst().npc.contains(e.getInventory().getName().replace("§a", ""))) {
             e.setCancelled(true);
             if (ItemUtil.checkItem(e.getCurrentItem(), ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&cNapad"), (short) 11))) {
 
@@ -41,9 +43,10 @@ public class InventoryClickListener implements Listener {
                     for (Player police : policeList)
                         police.sendMessage(ChatUtil.chat("&8### &4Uwaga! &cNapad w toku (" + npc.getStoredLocation().getBlockX() + ", " + npc.getStoredLocation().getBlockZ() + ") &###"));
 
-                    p.sendTitle(ChatUtil.chat("&2Napad"), ChatUtil.chat("&aSprzedawca wyjmuje pieniadze z kasy"), 20, 100, 20);
+                    p.sendTitle(ChatUtil.chat("&4Napad"), ChatUtil.chat("&cSprzedawca wyjmuje pieniadze z kasy"), 20, 100, 20);
                     p.closeInventory();
                     NpcClickListener.addData(npc, true);
+                    NpcClickListener.addNextHeist(npc, DataUtil.parseDateDiff("3h", true));
 
                     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInst(), new Runnable() {
                         @Override
@@ -53,7 +56,7 @@ public class InventoryClickListener implements Listener {
                                 p.sendMessage(ChatUtil.chat("&4Blad! Napad zostal przerwany!"));
                                 return;
                             }
-                            int money = RandomUtil.getRandInt(20000, 100000);
+                            int money = RandomUtil.getRandInt(10000, 30000);
                             EconomyUtil.addMoney(p, money);
                             NpcClickListener.removeData(npc);
                             p.sendTitle(ChatUtil.chat("&2Napad"), ChatUtil.chat("&aOtrzymales " + money + "$ od sprzedawcy"), 20, 100, 20);
@@ -104,24 +107,28 @@ public class InventoryClickListener implements Listener {
                 EconomyUtil.addMoney(p, 2000);
                 u.setCreditSize(2000);
                 u.setCredit(true);
+                p.sendMessage(ChatUtil.chat("&aWziales pozyczke 2000$"));
                 p.closeInventory();
             }
             if (slot == 12) {
                 EconomyUtil.addMoney(p, 5000);
                 u.setCreditSize(5000);
                 u.setCredit(true);
+                p.sendMessage(ChatUtil.chat("&aWziales pozyczke 5000$"));
                 p.closeInventory();
             }
             if (slot == 14) {
                 EconomyUtil.addMoney(p, 10000);
                 u.setCreditSize(10000);
                 u.setCredit(true);
+                p.sendMessage(ChatUtil.chat("&aWziales pozyczke 10000$"));
                 p.closeInventory();
             }
             if (slot == 16) {
                 EconomyUtil.addMoney(p, 20000);
                 u.setCreditSize(20000);
                 u.setCredit(true);
+                p.sendMessage(ChatUtil.chat("&aWziales pozyczke 20000$"));
                 p.closeInventory();
             }
         }

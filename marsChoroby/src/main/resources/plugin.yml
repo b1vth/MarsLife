@@ -1,0 +1,4 @@
+name: m,arsChoroby
+version: ${project.version}
+main: me.b1vth420.marsChoroby.Main
+depend: [marsApi]

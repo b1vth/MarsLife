@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MarsLife.iml" filepath="$PROJECT_DIR$/MarsLife.iml" />
       <module fileurl="file://$PROJECT_DIR$/marsApi/marsApi.iml" filepath="$PROJECT_DIR$/marsApi/marsApi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/marsChoroby/marsChoroby.iml" filepath="$PROJECT_DIR$/marsChoroby/marsChoroby.iml" />
       <module fileurl="file://$PROJECT_DIR$/marsNapady/marsNapady.iml" filepath="$PROJECT_DIR$/marsNapady/marsNapady.iml" />
     </modules>
   </component>

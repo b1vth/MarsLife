@@ -36,7 +36,6 @@ public class Main extends JavaPlugin {
 
     void init() {
         Config.getInst().load();
-        MySQL.createTable();
     }
 
     void registerCommands() {

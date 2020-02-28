@@ -1,7 +1,8 @@
 package me.b1vth420.marsNapady.Listeners;
 
-import me.b1vth420.marsNapady.Managers.UserManager;
-import me.b1vth420.marsNapady.Objects.User;
+import me.b1vth420.marsApi.Managers.UserManager;
+import me.b1vth420.marsApi.Objects.MarsUser;
+import me.b1vth420.marsApi.Utils.ChatUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,21 +17,32 @@ public class AsyncPlayerChatListener implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
-        User u = UserManager.getUser(p);
-        if (!data.containsKey(p)) {
+        MarsUser u = UserManager.getUser(p);
+        if (!getData().containsKey(p) || getData().get(p) == null) {
             return;
         }
 
-        if (data.get(p).equals("wyplacanie")) {
+        if (getData().get(p).equals("wyplacanie")) {
             e.setCancelled(true);
+            if (!ChatUtil.isDouble(e.getMessage().split(" ")[0])) {
+                p.sendMessage(ChatUtil.chat("&4Blad! &cTo nie jest liczba!"));
+                return;
+            }
             u.removeBankMoney(Double.parseDouble(e.getMessage().split(" ")[0]));
             removeData(p);
+            return;
         }
 
-        if (data.get(p).equals("wplacanie")) {
+        if (getData().get(p).equals("wplacanie")) {
             e.setCancelled(true);
+            if (!ChatUtil.isDouble(e.getMessage().split(" ")[0])) {
+                p.sendMessage(ChatUtil.chat("&4Blad! &cTo nie jest liczba!"));
+                return;
+            }
+            p.sendMessage(ChatUtil.chat("&aWplaciles " + Double.parseDouble(e.getMessage().split(" ")[0]) + "$"));
             u.addBankMoney(Double.parseDouble(e.getMessage().split(" ")[0]));
             removeData(p);
+            return;
         }
 
     }
