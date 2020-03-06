@@ -1,6 +1,6 @@
-package me.b1vth420.marsApi.Managers;
+package me.b1vth420.marsNapady.Managers;
 
-import me.b1vth420.marsApi.Objects.MarsUser;
+import me.b1vth420.marsNapady.Objects.MarsUser;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;

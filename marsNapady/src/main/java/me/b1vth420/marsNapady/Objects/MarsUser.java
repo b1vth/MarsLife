@@ -1,8 +1,8 @@
-package me.b1vth420.marsApi.Objects;
+package me.b1vth420.marsNapady.Objects;
 
-import me.b1vth420.marsApi.Managers.UserManager;
 import me.b1vth420.marsApi.Utils.ChatUtil;
 import me.b1vth420.marsApi.Utils.EconomyUtil;
+import me.b1vth420.marsNapady.Managers.UserManager;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;
@@ -56,6 +56,7 @@ public class MarsUser {
         if (EconomyUtil.getBalance(Bukkit.getPlayer(this.uuid)) >= money) {
             EconomyUtil.removeMoney(Bukkit.getPlayer(this.uuid), money);
             bankMoney += money;
+            sendMessage(ChatUtil.chat("&aWplaciles " + ChatUtil.formatDouble(money) + "$"));
         } else {
             sendMessage(ChatUtil.chat("&4Blad! &cNie masz tyle pieniedzy!"));
         }

@@ -1,8 +1,8 @@
 package me.b1vth420.marsNapady.Listeners;
 
-import me.b1vth420.marsApi.Managers.UserManager;
-import me.b1vth420.marsApi.Objects.MarsUser;
 import me.b1vth420.marsApi.Utils.ChatUtil;
+import me.b1vth420.marsNapady.Managers.UserManager;
+import me.b1vth420.marsNapady.Objects.MarsUser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,7 +39,6 @@ public class AsyncPlayerChatListener implements Listener {
                 p.sendMessage(ChatUtil.chat("&4Blad! &cTo nie jest liczba!"));
                 return;
             }
-            p.sendMessage(ChatUtil.chat("&aWplaciles " + Double.parseDouble(e.getMessage().split(" ")[0]) + "$"));
             u.addBankMoney(Double.parseDouble(e.getMessage().split(" ")[0]));
             removeData(p);
             return;

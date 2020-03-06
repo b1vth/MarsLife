@@ -1,8 +1,8 @@
 package me.b1vth420.marsNapady.Commands;
 
 import me.b1vth420.marsApi.Commands.Command;
-import me.b1vth420.marsApi.Managers.UserManager;
 import me.b1vth420.marsApi.Utils.ChatUtil;
+import me.b1vth420.marsNapady.Managers.UserManager;
 import org.bukkit.command.CommandSender;
 
 public class PoszukiwaniCommand extends Command {

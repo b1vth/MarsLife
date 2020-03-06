@@ -1,8 +1,8 @@
 package me.b1vth420.marsNapady.Data;
 
 import me.b1vth420.marsApi.Api;
-import me.b1vth420.marsApi.Managers.UserManager;
-import me.b1vth420.marsApi.Objects.MarsUser;
+import me.b1vth420.marsNapady.Managers.UserManager;
+import me.b1vth420.marsNapady.Objects.MarsUser;
 
 import java.util.Map;
 import java.util.UUID;
