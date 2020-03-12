@@ -14,7 +14,7 @@ public class BankierGui {
     public static InventoryView npcGui(Player p, String s) {
         Inventory inv = Bukkit.createInventory(null, InventoryType.HOPPER, ChatUtil.chat("&a" + s));
         inv.setItem(0, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&2Wplac"), (short) 4));
-        inv.setItem(2, ItemUtil.BuildItem(Material.GOLD_NUGGET, ChatUtil.chat("&aStan konta " + UserManager.getUser(p).getBankMoney())));
+        inv.setItem(2, ItemUtil.BuildItem(Material.GOLD_NUGGET, ChatUtil.chat("&aStan konta " + UserManager.getUser(p).getBankMoney() + "$")));
         inv.setItem(4, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aWyplac"), (short) 5));
         return p.openInventory(inv);
     }

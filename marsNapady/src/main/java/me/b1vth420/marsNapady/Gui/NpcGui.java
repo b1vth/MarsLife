@@ -18,7 +18,7 @@ public class NpcGui {
         inv.setItem(0, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&cNapad"), (short) 11));
         inv.setItem(1, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aWyplac"), (short) 5));
         inv.setItem(2, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&2Wplac"), (short) 4));
-        inv.setItem(3, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aStan konta: " + UserManager.getUser(p).getBankMoney()), (short) 12));
+        inv.setItem(3, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aStan konta: " + UserManager.getUser(p).getBankMoney()) + "$", (short) 12));
         inv.setItem(4, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&bPozyczka"), (short) 14));
         for (ItemStack is : Config.getInst().heistItems) {
             inv.addItem(is);
@@ -28,10 +28,10 @@ public class NpcGui {
 
     public static InventoryView pozyczkaGui(Player p, String s) {
         Inventory inv = Bukkit.createInventory(null, 27, ChatUtil.chat("&a" + s));
-        inv.setItem(10, ItemUtil.BuildItem(Material.IRON_NUGGET, ChatUtil.chat("&a2000")));
-        inv.setItem(12, ItemUtil.BuildItem(Material.GOLD_NUGGET, ChatUtil.chat("&a5000")));
-        inv.setItem(14, ItemUtil.BuildItem(Material.GOLD_INGOT, ChatUtil.chat("&a10000")));
-        inv.setItem(16, ItemUtil.BuildItem(Material.GOLD_BLOCK, ChatUtil.chat("&a20000")));
+        inv.setItem(10, ItemUtil.BuildItem(Material.IRON_NUGGET, ChatUtil.chat("&a2000$")));
+        inv.setItem(12, ItemUtil.BuildItem(Material.GOLD_NUGGET, ChatUtil.chat("&a5000$")));
+        inv.setItem(14, ItemUtil.BuildItem(Material.GOLD_INGOT, ChatUtil.chat("&a10000$")));
+        inv.setItem(16, ItemUtil.BuildItem(Material.GOLD_BLOCK, ChatUtil.chat("&a20000$")));
         if (UserManager.getUser(p).isCredit()) {
             inv.setItem(26, ItemUtil.BuildItem(Material.GOLD_NUGGET, ChatUtil.chat("&2Splac pozyczke!")));
         }

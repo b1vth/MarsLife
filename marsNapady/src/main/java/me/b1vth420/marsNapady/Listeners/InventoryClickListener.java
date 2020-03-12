@@ -36,7 +36,7 @@ public class InventoryClickListener implements Listener {
 
                 List<Player> policeList = PlayerUtil.getPlayersWithPermission(Config.getInst().policePermission);
                 if (policeList.size() < Config.getInst().policeForHeist) {
-                    p.sendMessage(ChatUtil.chat("&4Blad! &cNa serwerze nie ma odpowiedniej ilosci policji!"));
+                    p.sendMessage(ChatUtil.chat("&4Blad! &cNa serwerze nie ma odpowiedniej ilosci policji!" + Config.getInst().policeForHeist));
                     return;
                 }
                 if (Config.getInst().heistItems.contains(p.getInventory().getItemInMainHand())) {
@@ -63,7 +63,7 @@ public class InventoryClickListener implements Listener {
                         }
                     }, Config.getInst().heistTime * 20L);
                 }
-            }
+            } else p.sendMessage(ChatUtil.chat("&4Blad! &cMusisz miec bron!"));
 
             if (ItemUtil.checkItem(e.getCurrentItem(), ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aWyplac"), (short) 5))) {
                 AsyncPlayerChatListener.addData(p, "wyplacanie");

@@ -1,0 +1,20 @@
+diseases:
+  zlamana_noga:
+    name: '&cZlamana noga'
+    chance: 10
+    cause: 'FALL'
+    contagious:
+      chance: 0
+      isContagious: false
+      minDistance: 0
+    message: '&4Uwaga! &cZlamales sobie noge!'
+    break:
+      isBreak: true
+      fallDistance: 5
+    effects:
+      - SLOWNESS 1
+    cure:
+      name: '&aBandaz'
+      material: PAPER
+      lore:
+        - 'Pierwsza linijka'
