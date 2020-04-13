@@ -8,3 +8,5 @@ heistItems:
   - BLAZE_ROD 1 0 &cRozdzka_do_napadu #ITEM ILOSC DATA(DLA ZWYKLYCH ITEMOW 0) NAZWA
 
 policeForHeist: 3
+
+oneHeistPer: "1h"

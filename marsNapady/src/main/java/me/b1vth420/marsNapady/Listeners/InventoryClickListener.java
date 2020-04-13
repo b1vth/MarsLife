@@ -39,6 +39,10 @@ public class InventoryClickListener implements Listener {
                     p.sendMessage(ChatUtil.chat("&4Blad! &cNa serwerze nie ma odpowiedniej ilosci policji!" + Config.getInst().policeForHeist));
                     return;
                 }
+                if (NpcClickListener.getNextHeist().get(npc) != null && NpcClickListener.getNextHeist().get(npc) >= System.currentTimeMillis()) {
+                    p.sendMessage(ChatUtil.chat("&4Blad! &cW tym miejscu nie dawno mial miejsce napad!"));
+                    return;
+                }
                 if (Config.getInst().heistItems.contains(p.getInventory().getItemInMainHand())) {
                     for (Player police : policeList)
                         police.sendMessage(ChatUtil.chat("&8### &4Uwaga! &cNapad w toku (" + npc.getStoredLocation().getBlockX() + ", " + npc.getStoredLocation().getBlockZ() + ") &###"));
@@ -46,7 +50,14 @@ public class InventoryClickListener implements Listener {
                     p.sendTitle(ChatUtil.chat("&4Napad"), ChatUtil.chat("&cSprzedawca wyjmuje pieniadze z kasy"), 20, 100, 20);
                     p.closeInventory();
                     NpcClickListener.addData(npc, true);
-                    NpcClickListener.addNextHeist(npc, DataUtil.parseDateDiff("3h", true));
+                    NpcClickListener.addNextHeist(npc, DataUtil.parseDateDiff(Config.getInst().oneHeistPer, true));
+
+                    new CountDown(Config.getInst().heistTime, p, Main.getInst()) {
+                        @Override
+                        public void count(int current) {
+                            ChatUtil.sendActionBar(p, "&4Do konca napadu zostalo: " + current + " sekund");
+                        }
+                    }.start();
 
                     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInst(), new Runnable() {
                         @Override
@@ -62,8 +73,8 @@ public class InventoryClickListener implements Listener {
                             p.sendTitle(ChatUtil.chat("&2Napad"), ChatUtil.chat("&aOtrzymales " + money + "$ od sprzedawcy"), 20, 100, 20);
                         }
                     }, Config.getInst().heistTime * 20L);
-                }
-            } else p.sendMessage(ChatUtil.chat("&4Blad! &cMusisz miec bron!"));
+                } else p.sendMessage(ChatUtil.chat("&4Blad! &cMusisz miec bron!"));
+            }
 
             if (ItemUtil.checkItem(e.getCurrentItem(), ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aWyplac"), (short) 5))) {
                 AsyncPlayerChatListener.addData(p, "wyplacanie");
@@ -106,6 +117,7 @@ public class InventoryClickListener implements Listener {
             if (slot == 10) {
                 EconomyUtil.addMoney(p, 2000);
                 u.setCreditSize(2000);
+                u.setCreditTime(System.currentTimeMillis());
                 u.setCredit(true);
                 p.sendMessage(ChatUtil.chat("&aWziales pozyczke 2000$"));
                 p.closeInventory();
@@ -113,6 +125,7 @@ public class InventoryClickListener implements Listener {
             if (slot == 12) {
                 EconomyUtil.addMoney(p, 5000);
                 u.setCreditSize(5000);
+                u.setCreditTime(System.currentTimeMillis());
                 u.setCredit(true);
                 p.sendMessage(ChatUtil.chat("&aWziales pozyczke 5000$"));
                 p.closeInventory();
@@ -120,6 +133,7 @@ public class InventoryClickListener implements Listener {
             if (slot == 14) {
                 EconomyUtil.addMoney(p, 10000);
                 u.setCreditSize(10000);
+                u.setCreditTime(System.currentTimeMillis());
                 u.setCredit(true);
                 p.sendMessage(ChatUtil.chat("&aWziales pozyczke 10000$"));
                 p.closeInventory();
@@ -127,6 +141,7 @@ public class InventoryClickListener implements Listener {
             if (slot == 16) {
                 EconomyUtil.addMoney(p, 20000);
                 u.setCreditSize(20000);
+                u.setCreditTime(System.currentTimeMillis());
                 u.setCredit(true);
                 p.sendMessage(ChatUtil.chat("&aWziales pozyczke 20000$"));
                 p.closeInventory();

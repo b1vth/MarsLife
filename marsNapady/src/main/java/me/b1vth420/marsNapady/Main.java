@@ -50,7 +50,6 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new AsyncPlayerChatListener(), this);
     }
 
-
     public static Main getInst() {
         if (inst == null) return new Main();
         return inst;

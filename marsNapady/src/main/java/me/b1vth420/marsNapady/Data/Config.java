@@ -29,6 +29,7 @@ public class Config {
     public String policePermission;
     public List<ItemStack> heistItems;
     public int policeForHeist;
+    public String oneHeistPer;
 
     public void load() {
         for (String s : cfg.getStringList("npc")) {
@@ -43,6 +44,7 @@ public class Config {
         this.policePermission = cfg.getString("policePermission");
         this.heistItems = ItemUtil.parseItems(cfg.getStringList("heistItems"));
         this.policeForHeist = cfg.getInt("policeForHeist");
+        this.oneHeistPer = cfg.getString("oneHeistPer");
     }
 
     public void save() {
@@ -51,6 +53,7 @@ public class Config {
         cfg.set("heistTime", this.heistTime);
         cfg.set("policePermission", this.policePermission);
         cfg.set("npc", npc.toArray());
+        ;
         for (Location s : bankomat) {
             bankomatString.add(s.getWorld().getName() + " " + s.getBlockX() + " " + s.getBlockY() + " " + s.getBlockZ());
         }
@@ -63,6 +66,7 @@ public class Config {
         }
         cfg.set("heistItems", heistItems);
         cfg.set("policeForHeist", policeForHeist);
+        cfg.set("oneHeistPer", oneHeistPer);
         try {
             cfg.save(f);
         } catch (IOException e) {

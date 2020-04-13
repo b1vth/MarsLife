@@ -14,13 +14,15 @@ public class MarsUser {
     private double bankMoney;
     private boolean credit;
     private int creditSize;
+    private long creditTime;
 
-    public MarsUser(String name, UUID uuid, double bankMoney, boolean credit, int creditSize) {
+    public MarsUser(String name, UUID uuid, double bankMoney, boolean credit, int creditSize, long creditTime) {
         this.name = name;
         this.uuid = uuid;
         this.bankMoney = bankMoney;
         this.credit = credit;
         this.creditSize = creditSize;
+        this.creditTime = creditTime;
         UserManager.addUser(this);
     }
 
@@ -52,6 +54,14 @@ public class MarsUser {
         return creditSize;
     }
 
+    public long getCreditTime() {
+        return creditTime;
+    }
+
+    public void setCreditTime(long time) {
+        this.creditTime = time;
+    }
+
     public void addBankMoney(double money) {
         if (EconomyUtil.getBalance(Bukkit.getPlayer(this.uuid)) >= money) {
             EconomyUtil.removeMoney(Bukkit.getPlayer(this.uuid), money);
@@ -69,6 +79,7 @@ public class MarsUser {
     public void resetCredit() {
         this.setCredit(false);
         this.setCreditSize(0);
+        this.setCreditTime(0);
     }
 
     public void removeBankMoney(double money) {

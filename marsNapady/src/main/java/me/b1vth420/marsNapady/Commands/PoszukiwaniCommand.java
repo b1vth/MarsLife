@@ -13,6 +13,10 @@ public class PoszukiwaniCommand extends Command {
     @Override
     public void execute(CommandSender sender, String[] args) {
         sender.sendMessage(ChatUtil.chat("&1Dlugi: "));
-        UserManager.getUsersWithDebt().forEach(u -> sender.sendMessage("&9" + u.getName() + " " + u.getCreditSize()));
+        UserManager.getUsersWithDebt().forEach(u -> {
+            if (u.getCreditTime() + 604_800_000 < System.currentTimeMillis())
+                sender.sendMessage("&9" + u.getName() + " " + u.getCreditSize());
+        });
+
     }
 }

@@ -27,7 +27,7 @@ public class UserManager {
         for (MarsUser u : users.values()) {
             if (u.getUuid().equals(p.getUniqueId())) return u;
         }
-        return new MarsUser(p.getName(), p.getUniqueId(), 0, false, 0);
+        return new MarsUser(p.getName(), p.getUniqueId(), 0, false, 0, 0L);
     }
 
     public static List<MarsUser> getUsersWithDebt() {
