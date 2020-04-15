@@ -18,7 +18,7 @@ public class NpcGui {
         inv.setItem(0, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&cNapad"), (short) 11));
         inv.setItem(1, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aWyplac"), (short) 5));
         inv.setItem(2, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&2Wplac"), (short) 4));
-        inv.setItem(3, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aStan konta: " + UserManager.getUser(p).getBankMoney()) + "$", (short) 12));
+        inv.setItem(3, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&aStan konta: " + ChatUtil.formatDouble(UserManager.getUser(p).getBankMoney())) + "$", (short) 12));
         inv.setItem(4, ItemUtil.BuildItem(Material.WOOL, ChatUtil.chat("&bPozyczka"), (short) 14));
         for (ItemStack is : Config.getInst().heistItems) {
             inv.addItem(is);

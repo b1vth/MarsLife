@@ -15,7 +15,7 @@ public class PoszukiwaniCommand extends Command {
         sender.sendMessage(ChatUtil.chat("&1Dlugi: "));
         UserManager.getUsersWithDebt().forEach(u -> {
             if (u.getCreditTime() + 604_800_000 < System.currentTimeMillis())
-                sender.sendMessage("&9" + u.getName() + " " + u.getCreditSize());
+                sender.sendMessage(ChatUtil.chat("&9" + u.getName() + " " + u.getCreditSize()));
         });
 
     }

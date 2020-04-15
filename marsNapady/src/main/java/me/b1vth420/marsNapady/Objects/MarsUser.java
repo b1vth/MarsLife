@@ -72,6 +72,16 @@ public class MarsUser {
         }
     }
 
+    public void removeBankMoney(double money) {
+        if (bankMoney >= money) {
+            sendMessage("&aWyplaciles " + money + "$ ze swojego konta!");
+            EconomyUtil.addMoney(Bukkit.getPlayer(uuid), money);
+            bankMoney -= money;
+        } else {
+            sendMessage("&4Blad! &cNie masz tyle pieniedzy!");
+        }
+    }
+
     public void sendMessage(String s) {
         Bukkit.getPlayer(this.uuid).sendMessage(ChatUtil.chat(s));
     }
@@ -82,13 +92,4 @@ public class MarsUser {
         this.setCreditTime(0);
     }
 
-    public void removeBankMoney(double money) {
-        if (bankMoney >= money) {
-            sendMessage("&aWyplaciles " + money + " ze swojego konta!");
-            EconomyUtil.addMoney(Bukkit.getPlayer(uuid), money);
-            bankMoney -= money;
-        } else {
-            sendMessage("&4Blad! &cNie masz tyle pieniedzy!");
-        }
-    }
 }
