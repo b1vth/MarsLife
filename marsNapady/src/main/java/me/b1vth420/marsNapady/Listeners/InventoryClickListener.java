@@ -45,7 +45,7 @@ public class InventoryClickListener implements Listener {
                 }
                 if (Config.getInst().heistItems.contains(p.getInventory().getItemInMainHand())) {
                     for (Player police : policeList)
-                        police.sendMessage(ChatUtil.chat("&8### &4Uwaga! &cNapad w toku (" + npc.getStoredLocation().getBlockX() + ", " + npc.getStoredLocation().getBlockZ() + ") &###"));
+                        police.sendMessage(ChatUtil.chat("&8### &4Uwaga! &cNapad w toku (" + npc.getStoredLocation().getBlockX() + ", " + npc.getStoredLocation().getBlockZ() + ") &8###"));
 
                     p.sendTitle(ChatUtil.chat("&4Napad"), ChatUtil.chat("&cSprzedawca wyjmuje pieniadze z kasy"), 20, 100, 20);
                     p.closeInventory();
@@ -67,7 +67,7 @@ public class InventoryClickListener implements Listener {
                                 p.sendMessage(ChatUtil.chat("&4Blad! Napad zostal przerwany!"));
                                 return;
                             }
-                            int money = RandomUtil.getRandInt(10000, 30000);
+                            int money = RandomUtil.getRandInt(Config.getInst().minHeistMoney, Config.getInst().maxHeistMoney);
                             EconomyUtil.addMoney(p, money);
                             NpcClickListener.removeData(npc);
                             p.sendTitle(ChatUtil.chat("&2Napad"), ChatUtil.chat("&aOtrzymales " + money + "$ od sprzedawcy"), 20, 100, 20);

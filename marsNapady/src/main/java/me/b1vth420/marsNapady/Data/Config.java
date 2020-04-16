@@ -30,6 +30,8 @@ public class Config {
     public List<ItemStack> heistItems;
     public int policeForHeist;
     public String oneHeistPer;
+    public int minHeistMoney;
+    public int maxHeistMoney;
 
     public void load() {
         for (String s : cfg.getStringList("npc")) {
@@ -45,6 +47,8 @@ public class Config {
         this.heistItems = ItemUtil.parseItems(cfg.getStringList("heistItems"));
         this.policeForHeist = cfg.getInt("policeForHeist");
         this.oneHeistPer = cfg.getString("oneHeistPer");
+        this.minHeistMoney = cfg.getInt("minHeistMoney");
+        this.maxHeistMoney = cfg.getInt("maxHeistMoney");
     }
 
     public void save() {
@@ -67,6 +71,8 @@ public class Config {
         cfg.set("heistItems", heistItems);
         cfg.set("policeForHeist", policeForHeist);
         cfg.set("oneHeistPer", oneHeistPer);
+        cfg.set("minHeistMoney", minHeistMoney);
+        cfg.set("maxHeistMoney", maxHeistMoney);
         try {
             cfg.save(f);
         } catch (IOException e) {
