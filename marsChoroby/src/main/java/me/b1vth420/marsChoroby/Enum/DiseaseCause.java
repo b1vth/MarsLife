@@ -7,4 +7,5 @@ public enum DiseaseCause {
     SLEEP,
     HAND,
     LEG,
+    DRINK,
 }

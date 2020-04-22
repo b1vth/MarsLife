@@ -2,22 +2,21 @@ package me.b1vth420.marsChoroby.Managers;
 
 import me.b1vth420.marsChoroby.Objects.Disease;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class DiseaseManager {
 
-    private static List<Disease> diseases = new ArrayList();
+    private static ConcurrentHashMap<String, Disease> diseases = new ConcurrentHashMap();
 
-    public static List<Disease> getDiseases() {
-        return new ArrayList<>(diseases);
+    public static ConcurrentHashMap<String, Disease> getDiseases() {
+        return new ConcurrentHashMap<>(diseases);
     }
 
-    public static void addDisease(Disease d) {
-        if (!diseases.contains(d)) diseases.add(d);
+    public static void addDisease(String name,Disease d) {
+        if (!diseases.contains(d)) diseases.put(name, d);
     }
 
-    public static void removeDisease(Disease d) {
-        if (diseases.contains(d)) diseases.remove(d);
+    public static void removeDisease(String d) {
+        if (diseases.containsKey(d)) diseases.remove(d);
     }
 }
