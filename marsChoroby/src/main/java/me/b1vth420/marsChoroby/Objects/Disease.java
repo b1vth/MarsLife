@@ -5,7 +5,7 @@ import me.b1vth420.marsChoroby.Managers.DiseaseManager;
 import org.bukkit.Material;
 import org.bukkit.potion.PotionEffect;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Disease {
@@ -18,12 +18,16 @@ public class Disease {
     private double contagiousChance;
     private int contagiousMinDistance;
     private String message;
+    private String healthyMessage;
     private boolean isBreak;
     private int fallDistance;
+    private boolean isDrink;
+    private int minDrinkValue;
     private List<PotionEffect> effects;
+    private boolean isThereCure;
     private Medicine medicine;
 
-    public Disease(String name, String visibleName, double chance, String cause, boolean isContagious, double contagiousChance, int contagiousMinDistance, String message, boolean isBreak, int fallDistance, List<PotionEffect> effects, String cureName, Material cureMaterial, Collection<String> cureLore) {
+    public Disease(String name, String visibleName, double chance, String cause, boolean isContagious, double contagiousChance, int contagiousMinDistance, String message, String healthyMessage, boolean isBreak, int fallDistance, boolean isDrink, int minDrinkValue, List<PotionEffect> effects, String cureName, Material cureMaterial, boolean isThereCure, ArrayList<String> cureLore) {
         this.name = name;
         this.visibleName = visibleName;
         this.chance = chance;
@@ -32,15 +36,23 @@ public class Disease {
         this.contagiousChance = contagiousChance;
         this.contagiousMinDistance = contagiousMinDistance;
         this.message = message;
+        this.healthyMessage = healthyMessage;
         this.isBreak = isBreak;
+        this.isDrink = isDrink;
+        this.minDrinkValue = minDrinkValue;
         this.fallDistance = fallDistance;
         this.effects = effects;
+        this.isThereCure = isThereCure;
         medicine = new Medicine(cureName, cureMaterial, cureLore);
         DiseaseManager.addDisease(name,this);
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getVisibleName() {
+        return visibleName;
     }
 
     public double getChance() {
@@ -67,12 +79,24 @@ public class Disease {
         return message;
     }
 
+    public String getHealthyMessage() {
+        return healthyMessage;
+    }
+
     public boolean isBreak() {
         return isBreak;
     }
 
     public int getFallDistance() {
         return fallDistance;
+    }
+
+    public boolean isDrink() {
+        return isDrink;
+    }
+
+    public int getMinDrinkValue() {
+        return minDrinkValue;
     }
 
     public List<PotionEffect> getEffects() {

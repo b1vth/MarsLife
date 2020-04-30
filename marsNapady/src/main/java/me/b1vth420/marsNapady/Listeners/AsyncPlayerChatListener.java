@@ -1,8 +1,8 @@
 package me.b1vth420.marsNapady.Listeners;
 
+import me.b1vth420.marsApi.Managers.UserManager;
+import me.b1vth420.marsApi.Objects.MarsUser;
 import me.b1vth420.marsApi.Utils.ChatUtil;
-import me.b1vth420.marsNapady.Managers.UserManager;
-import me.b1vth420.marsNapady.Objects.MarsUser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -1,5 +1,6 @@
 package me.b1vth420.marsChoroby.Utils;
 
+import me.b1vth420.marsApi.Utils.ChatUtil;
 import me.b1vth420.marsChoroby.Main;
 import me.b1vth420.marsChoroby.Objects.Disease;
 import org.bukkit.Material;
@@ -28,17 +29,21 @@ public class DiseasesLoader {
             double contagiousChance = cs1.getDouble("contagious.chance");
             int contagiousMinDistance = cs1.getInt("contagious.minDistance");
             String message = cs1.getString("message");
+            String healthyMessage = cs1.getString("healthyMessage");
             boolean isBreak = cs1.getBoolean("break.isBreak");
             int fallDistance = cs1.getInt("break.fallDistance");
+            boolean isDrink = cs1.getBoolean("drink.isDrink");
+            int minDrink = cs1.getInt("drink.minDrinkAmount");
             for(String sx : cs1.getStringList("effects")) {
                 String[] ss = sx.split(" ");
                 effectList.add(new PotionEffect(PotionEffectType.getByName(ss[0]), Integer.MAX_VALUE, Integer.parseInt(ss[1])-1));
             }
+            boolean isThereCure = cs1.getBoolean("isThereCure");
             String cureName = cs1.getString("cure.name");
             Material cureMaterial = Material.getMaterial(cs1.getString("cure.material"));
-            List<String> cureLore = cs1.getStringList("cure.lore");
-
-            new Disease(name, visibleName, chance, cause, isContagious, contagiousChance, contagiousMinDistance, message, isBreak, fallDistance, effectList, cureName, cureMaterial, cureLore);
+            List<String> cureLore = new ArrayList<>();
+            for(String ss : cureLore) cureLore.add(ChatUtil.chat(ss));
+            new Disease(name, visibleName, chance, cause, isContagious, contagiousChance, contagiousMinDistance, message, healthyMessage, isBreak, fallDistance, isDrink, minDrink, effectList, cureName, cureMaterial, isThereCure, (ArrayList<String>) cureLore);
         }
     }
 }

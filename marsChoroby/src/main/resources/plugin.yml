@@ -1,4 +1,4 @@
-name: m,arsChoroby
+name: marsChoroby
 version: ${project.version}
 main: me.b1vth420.marsChoroby.Main
 depend: [marsApi]

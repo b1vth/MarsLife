@@ -19,4 +19,9 @@ public class DiseaseManager {
     public static void removeDisease(String d) {
         if (diseases.containsKey(d)) diseases.remove(d);
     }
+
+    public static Disease getDisease(String name) {
+        if(diseases.containsKey(diseases.get(name))) return diseases.get(name);
+        return null;
+    }
 }

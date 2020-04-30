@@ -1,9 +1,9 @@
 package me.b1vth420.marsNapady.Gui;
 
+import me.b1vth420.marsApi.Managers.UserManager;
 import me.b1vth420.marsApi.Utils.ChatUtil;
 import me.b1vth420.marsApi.Utils.ItemUtil;
 import me.b1vth420.marsNapady.Data.Config;
-import me.b1vth420.marsNapady.Managers.UserManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

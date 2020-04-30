@@ -35,7 +35,7 @@ public final class Api extends JavaPlugin {
         Config.getInst().load();
         registerDatabase();
         setupEconomy();
-        getSQLManager().createTable("CREATE TABLE IF NOT EXISTS marsUsers(UUID varchar(36) not null, name VARCHAR(16) not null, bankMoney text not null, isCredit text not null, creditSize text not null, creditTime text not null, primary key(uuid))");
+        getSQLManager().createTable("CREATE TABLE IF NOT EXISTS marsUsers(UUID varchar(36) not null, name VARCHAR(16) not null, bankMoney text not null, isCredit text not null, creditSize text not null, creditTime text not null, diseases text not null, primary key(uuid))");
         if (this.signMenuFactory == null) this.signMenuFactory = new SignMenuFactory(this);
     }
 

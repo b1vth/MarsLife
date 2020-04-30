@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="marsChoroby:jar">
+    <output-path>$USER_HOME$/Desktop/Serwery/MarsLife/plugins</output-path>
+    <root id="archive" name="marsChoroby.jar">
+      <element id="module-output" name="marsChoroby" />
+    </root>
+  </artifact>
+</component>

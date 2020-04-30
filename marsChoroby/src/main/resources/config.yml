@@ -2,18 +2,26 @@ diseases:
   zlamana_noga:
     name: '&cZlamana noga'
     chance: 10
-    cause: 'FALL'
+    cause: 'LEG' #Mozliwe DRINK, HUNGER, SLEEP, EAT, HAND (podczas udeznienia lub upadku), LEG (zlamanie podczas upadku)
     contagious:
       chance: 0
       isContagious: false
       minDistance: 0
     message: '&4Uwaga! &cZlamales sobie noge!'
+    healthyMessage: "Juz nie masz zlamenej nogi"
     break:
       isBreak: true
       fallDistance: 5
+    drink:
+      isDrink: false
+      minDrinkAmount: 5
+    sleep:
+      noSleepTime: 30m
     effects:
       - SLOWNESS 1
+    isThereCure: true
     cure:
+      cureTime: 10m
       name: '&aBandaz'
       material: PAPER
       lore:

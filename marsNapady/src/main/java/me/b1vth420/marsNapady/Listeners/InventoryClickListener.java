@@ -1,11 +1,11 @@
 package me.b1vth420.marsNapady.Listeners;
 
+import me.b1vth420.marsApi.Managers.UserManager;
+import me.b1vth420.marsApi.Objects.MarsUser;
 import me.b1vth420.marsApi.Utils.*;
 import me.b1vth420.marsNapady.Data.Config;
 import me.b1vth420.marsNapady.Gui.NpcGui;
 import me.b1vth420.marsNapady.Main;
-import me.b1vth420.marsNapady.Managers.UserManager;
-import me.b1vth420.marsNapady.Objects.MarsUser;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;

@@ -1,9 +1,10 @@
-package me.b1vth420.marsNapady.Managers;
+package me.b1vth420.marsApi.Managers;
 
-import me.b1vth420.marsNapady.Objects.MarsUser;
+import me.b1vth420.marsApi.Objects.MarsUser;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -27,7 +28,7 @@ public class UserManager {
         for (MarsUser u : users.values()) {
             if (u.getUuid().equals(p.getUniqueId())) return u;
         }
-        return new MarsUser(p.getName(), p.getUniqueId(), 0, false, 0, 0L);
+        return new MarsUser(p.getName(), p.getUniqueId(), 0, false, 0, 0L, new HashMap<>());
     }
 
     public static List<MarsUser> getUsersWithDebt() {
