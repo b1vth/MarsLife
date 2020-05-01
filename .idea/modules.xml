@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://D:/Users/Patryk/Documents/Java/ML-Inventory/ML-Inventory.iml" filepath="D:/Users/Patryk/Documents/Java/ML-Inventory/ML-Inventory.iml" />
+      <module fileurl="file://D:/Users/Patryk/Documents/Java/ML-drinking/ML-drinking.iml" filepath="D:/Users/Patryk/Documents/Java/ML-drinking/ML-drinking.iml" />
       <module fileurl="file://$PROJECT_DIR$/MarsLife.iml" filepath="$PROJECT_DIR$/MarsLife.iml" />
       <module fileurl="file://$PROJECT_DIR$/marsApi/marsApi.iml" filepath="$PROJECT_DIR$/marsApi/marsApi.iml" />
       <module fileurl="file://$PROJECT_DIR$/marsChoroby/marsChoroby.iml" filepath="$PROJECT_DIR$/marsChoroby/marsChoroby.iml" />

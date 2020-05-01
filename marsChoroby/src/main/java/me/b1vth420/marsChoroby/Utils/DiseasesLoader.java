@@ -39,11 +39,14 @@ public class DiseasesLoader {
                 effectList.add(new PotionEffect(PotionEffectType.getByName(ss[0]), Integer.MAX_VALUE, Integer.parseInt(ss[1])-1));
             }
             boolean isThereCure = cs1.getBoolean("isThereCure");
+            int noSleepTime = cs1.getInt("sleep.noSleepTime");
             String cureName = cs1.getString("cure.name");
+            String cureUseMessage = cs1.getString("cure.cureUseMessage");
+            String cureTime = cs1.getString("cure.cureTime");
             Material cureMaterial = Material.getMaterial(cs1.getString("cure.material"));
             List<String> cureLore = new ArrayList<>();
             for(String ss : cureLore) cureLore.add(ChatUtil.chat(ss));
-            new Disease(name, visibleName, chance, cause, isContagious, contagiousChance, contagiousMinDistance, message, healthyMessage, isBreak, fallDistance, isDrink, minDrink, effectList, cureName, cureMaterial, isThereCure, (ArrayList<String>) cureLore);
+            new Disease(name, visibleName, chance, cause, isContagious, contagiousChance, contagiousMinDistance, message, healthyMessage, isBreak, fallDistance, isDrink, minDrink, noSleepTime, effectList, cureName, cureMaterial, isThereCure, (ArrayList<String>) cureLore, cureTime, cureUseMessage);
         }
     }
 }

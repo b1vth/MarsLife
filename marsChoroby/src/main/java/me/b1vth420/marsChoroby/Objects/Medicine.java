@@ -10,19 +10,21 @@ import java.util.List;
 
 public class Medicine {
 
-    private String name;
-    private Material material;
-    private Collection<String> lore;
     private ItemStack cure;
+    private String cureTime;
+    private String cureUseMessage;
 
-    public Medicine(String name, Material material, List<String> lore) {
-        this.name = name;
-        this.material = material;
-        this.lore = lore;
+    public Medicine(String name, Material material, List<String> lore, String cureTime, String cureUseMessage) {
         this.cure = ItemUtil.BuildItem(material, ChatUtil.chat(name), lore);
+        this.cureTime = cureTime;
+        this.cureUseMessage = cureUseMessage;
     }
 
     public ItemStack getCure() {
-        return cure;
+        return this.cure;
     }
+
+    public String getCureTime() { return this.cureTime; }
+
+    public String getCureUseMessage() { return this.cureUseMessage; }
 }

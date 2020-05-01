@@ -10,7 +10,6 @@
         <module name="marsNapady" />
         <module name="marsChoroby" />
       </profile>
-      <profile name="Disabled" />
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="marsApi" target="1.8" />

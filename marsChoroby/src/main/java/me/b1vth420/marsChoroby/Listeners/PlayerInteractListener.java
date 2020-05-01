@@ -2,6 +2,8 @@ package me.b1vth420.marsChoroby.Listeners;
 
 import me.b1vth420.marsApi.Managers.UserManager;
 import me.b1vth420.marsApi.Objects.MarsUser;
+import me.b1vth420.marsApi.Utils.ChatUtil;
+import me.b1vth420.marsApi.Utils.DataUtil;
 import me.b1vth420.marsApi.Utils.ItemUtil;
 import me.b1vth420.marsChoroby.Managers.DiseaseManager;
 import me.b1vth420.marsChoroby.Objects.Disease;
@@ -24,7 +26,8 @@ public class PlayerInteractListener implements Listener {
             for(Disease d : DiseaseManager.getDiseases().values()) {
                 if(mu.hasDisease(d)) {
                     if (ItemUtil.checkItem(p.getInventory().getItemInMainHand(), d.getMedicine().getCure())) {
-
+                        mu.getDiseasesMap().put(d, DataUtil.parseDateDiff(d.getMedicine().getCureTime(), true));
+                        e.getPlayer().sendMessage(ChatUtil.chat(d.getMedicine().getCureUseMessage()));
                     }
                 }
             }

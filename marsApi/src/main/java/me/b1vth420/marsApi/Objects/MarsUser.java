@@ -7,6 +7,7 @@ import me.b1vth420.marsChoroby.Api.PlayerDiseaseChangeEvent;
 import me.b1vth420.marsChoroby.Objects.Disease;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -21,9 +22,9 @@ public class MarsUser {
     private int creditSize;
     private long creditTime;
     private long lastSleepTime;
-    private HashMap<Disease, String> diseases;
+    private HashMap<Disease, Long> diseases;
 
-    public MarsUser(String name, UUID uuid, double bankMoney, boolean credit, int creditSize, long creditTime, HashMap<Disease, String> diseases) {
+    public MarsUser(String name, UUID uuid, double bankMoney, boolean credit, int creditSize, long creditTime, HashMap<Disease, Long> diseases) {
         this.name = name;
         this.uuid = uuid;
         this.bankMoney = bankMoney;
@@ -105,18 +106,25 @@ public class MarsUser {
         Bukkit.getPluginManager().callEvent(event);
         if(hasDisease(d)) event.setCancelled(true);
         if (!event.isCancelled()) {
-            diseases.put(d, "0");
+            diseases.put(d, 0L);
             p.addPotionEffects(d.getEffects());
             p.sendMessage(ChatUtil.chat(d.getMessage()));
         }
     }
 
-    public HashMap<Disease, String> getDiseasesMap() {
+    public HashMap<Disease, Long> getDiseasesMap() {
         return new HashMap<>(diseases);
     }
 
-    public void removeDisease(Disease d) {
-        if(diseases.containsKey(d)) diseases.remove(d);
+    public void removeDisease(Disease d, Player p) {
+        PlayerDiseaseChangeEvent event = new PlayerDiseaseChangeEvent(p, null);
+        Bukkit.getPluginManager().callEvent(event);
+        if(!hasDisease(d)) event.setCancelled(true);
+        if(!event.isCancelled()) {
+            if(diseases.containsKey(d)) diseases.remove(d);
+            for(PotionEffect pe : d.getEffects()) p.removePotionEffect(pe.getType());
+            p.sendMessage(ChatUtil.chat(d.getHealthyMessage()));
+        }
     }
 
     public Set<Disease> getDiseases() { return diseases.keySet(); }
@@ -131,4 +139,8 @@ public class MarsUser {
         this.setCreditTime(0);
     }
 
+    public boolean isOnline() {
+        if(Bukkit.getPlayer(uuid) == null) return false;
+        else return Bukkit.getPlayer(uuid).isOnline();
+    }
 }

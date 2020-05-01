@@ -22,7 +22,7 @@ public class PlayerDrinkChangeListener implements Listener {
         if(e.getNawodnienieNew() > e.getNawodnienieOld()) {
             for(Disease d : mu.getDiseases()) {
                 if(d.isDrink() && e.getNawodnienieNew() > d.getMinDrinkValue()) {
-                    mu.removeDisease(d);
+                    mu.removeDisease(d, e.getPlayer());
                     e.getPlayer().sendMessage(ChatUtil.chat(d.getHealthyMessage()));
                     for(PotionEffect ef : d.getEffects()) {
                         e.getPlayer().removePotionEffect(ef.getType());

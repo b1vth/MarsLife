@@ -23,11 +23,12 @@ public class Disease {
     private int fallDistance;
     private boolean isDrink;
     private int minDrinkValue;
+    private int noSleepTime;
     private List<PotionEffect> effects;
     private boolean isThereCure;
     private Medicine medicine;
 
-    public Disease(String name, String visibleName, double chance, String cause, boolean isContagious, double contagiousChance, int contagiousMinDistance, String message, String healthyMessage, boolean isBreak, int fallDistance, boolean isDrink, int minDrinkValue, List<PotionEffect> effects, String cureName, Material cureMaterial, boolean isThereCure, ArrayList<String> cureLore) {
+    public Disease(String name, String visibleName, double chance, String cause, boolean isContagious, double contagiousChance, int contagiousMinDistance, String message, String healthyMessage, boolean isBreak, int fallDistance, boolean isDrink, int minDrinkValue, int noSleepTime, List<PotionEffect> effects, String cureName, Material cureMaterial, boolean isThereCure, ArrayList<String> cureLore, String cureTime, String cureUseMessage) {
         this.name = name;
         this.visibleName = visibleName;
         this.chance = chance;
@@ -40,10 +41,11 @@ public class Disease {
         this.isBreak = isBreak;
         this.isDrink = isDrink;
         this.minDrinkValue = minDrinkValue;
+        this.noSleepTime = noSleepTime;
         this.fallDistance = fallDistance;
         this.effects = effects;
         this.isThereCure = isThereCure;
-        medicine = new Medicine(cureName, cureMaterial, cureLore);
+        medicine = new Medicine(cureName, cureMaterial, cureLore, cureTime, cureUseMessage);
         DiseaseManager.addDisease(name,this);
     }
 
@@ -95,6 +97,8 @@ public class Disease {
         return isDrink;
     }
 
+    public boolean isSleep() { return (getCause() == DiseaseCause.DRINK); }
+
     public int getMinDrinkValue() {
         return minDrinkValue;
     }
@@ -106,4 +110,6 @@ public class Disease {
     public Medicine getMedicine() {
         return medicine;
     }
+
+    public int getNoSleepTime() { return (noSleepTime*1000*60); }
 }

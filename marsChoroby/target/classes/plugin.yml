@@ -1,0 +1,4 @@
+name: marsChoroby
+version: 1.0-SNAPSHOT
+main: me.b1vth420.marsChoroby.Main
+depend: [marsApi]

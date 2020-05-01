@@ -4,7 +4,6 @@ import me.b1vth420.marsApi.Utils.RegisterUtil;
 import me.b1vth420.marsNapady.Commands.BankCommand;
 import me.b1vth420.marsNapady.Commands.PoszukiwaniCommand;
 import me.b1vth420.marsNapady.Data.Config;
-import me.b1vth420.marsNapady.Data.MySQL;
 import me.b1vth420.marsNapady.Listeners.AsyncPlayerChatListener;
 import me.b1vth420.marsNapady.Listeners.InventoryClickListener;
 import me.b1vth420.marsNapady.Listeners.NpcClickListener;
@@ -25,13 +24,11 @@ public class Main extends JavaPlugin {
         init();
         registerCommands();
         registerListeners();
-        MySQL.loadUsers();
     }
 
     @Override
     public void onDisable() {
         Config.getInst().save();
-        MySQL.saveUsers();
     }
 
     void init() {

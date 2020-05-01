@@ -2,6 +2,7 @@ package me.b1vth420.marsApi;
 
 import me.b1vth420.marsApi.Data.Config;
 import me.b1vth420.marsApi.Data.FileManager;
+import me.b1vth420.marsApi.Data.MySQL.MySQL;
 import me.b1vth420.marsApi.Data.MySQL.SQLManager;
 import me.b1vth420.marsApi.Utils.SignMenuFactory;
 import net.milkbowl.vault.economy.Economy;
@@ -28,6 +29,7 @@ public final class Api extends JavaPlugin {
     @Override
     public void onDisable() {
         sql.onDisable();
+        MySQL.saveUsers();
     }
 
     private void init() {
@@ -37,6 +39,7 @@ public final class Api extends JavaPlugin {
         setupEconomy();
         getSQLManager().createTable("CREATE TABLE IF NOT EXISTS marsUsers(UUID varchar(36) not null, name VARCHAR(16) not null, bankMoney text not null, isCredit text not null, creditSize text not null, creditTime text not null, diseases text not null, primary key(uuid))");
         if (this.signMenuFactory == null) this.signMenuFactory = new SignMenuFactory(this);
+        MySQL.loadUsers();
     }
 
     public static Api getInst() {

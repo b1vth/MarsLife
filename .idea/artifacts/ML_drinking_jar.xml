@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ML-drinking:jar">
+    <output-path>$USER_HOME$/Desktop/Serwery/MarsLife/plugins</output-path>
+    <root id="archive" name="ML-drinking.jar">
+      <element id="module-output" name="ML-drinking" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/ActionBarAPI-1.5.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
